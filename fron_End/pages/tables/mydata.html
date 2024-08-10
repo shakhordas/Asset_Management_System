@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Table</title>
+</head>
+<body>
+  <h1>Data Table</h1>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Age</th>
+        <!-- Add more columns as needed -->
+      </tr>
+    </thead>
+    <tbody id="data-table-body">
+    </tbody>
+  </table>
+
+  <script>
+    fetch('http://localhost:2233/data')
+      .then(response => response.json())
+      .then(data => {
+        const tableBody = document.getElementById('data-table-body');
+        data.forEach(row => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td>${row.id}</td>
+            <td>${row.username}</td>
+            <td>${row.email}</td>
+            <!-- Add more cells as needed -->
+          `;
+          tableBody.appendChild(tr);
+        });
+      });
+  </script>
+</body>
+</html>
